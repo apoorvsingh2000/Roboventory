@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "959040908945",
+    "firebase_url": "https://roboventory-50412.firebaseio.com",
+    "project_id": "roboventory-50412",
+    "storage_bucket": "roboventory-50412.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:959040908945:android:20d518a3f21e0b5c471930",
+        "android_client_info": {
+          "package_name": "com.robovitics.roboventory"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "959040908945-879i9kk4np5lnmabktr6fsdbdpcesa08.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAGzF1SBHzKujQB_NzaI-nKUgLzFI66eMk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "959040908945-879i9kk4np5lnmabktr6fsdbdpcesa08.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
