@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'file:///C:/Users/apoor/AndroidStudioProjects/roboventory/lib/alert_dialogs/component_name.dart';
-import 'package:roboventory/utilities/constants.dart';
+import 'package:roboventory/components/admin/admin_component_item.dart';
 import 'package:roboventory/widgets/fab.dart';
-import 'file:///C:/Users/apoor/AndroidStudioProjects/roboventory/lib/alert_dialogs/fab_admin_components.dart';
+import 'package:roboventory/alert_dialogs/fab_admin_components.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+final _firestore = Firestore.instance;
 
 class AdminCatalogue extends StatelessWidget {
   static const String id = 'admin_catalogue_screen';
@@ -14,38 +16,43 @@ class AdminCatalogue extends StatelessWidget {
         title: Text('Catalogue'),
         backgroundColor: Colors.orangeAccent,
       ),
-      body: GridView.builder(
+      body: ComponentsStream(),
+    );
+  }
+}
+
+class ComponentsStream extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder<QuerySnapshot>(
+      stream: _firestore.collection('components').snapshots(),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) {
+          return Center(
+            child: CircularProgressIndicator(
+              backgroundColor: Colors.orangeAccent,
+            ),
+          );
+        }
+        final components = snapshot.data.documents;
+        List<ComponentItem> componentList = [];
+        for (var component in components) {
+          final name = component.data['name'];
+          print(name);
+          final description = component.data['description'];
+          final quantity = component.data['quantity'];
+          final price = component.data['price'];
+          final imageURL = component.data['imageURL'];
+          final ComponentItem item =
+              ComponentItem(name, description, price, quantity, imageURL);
+
+          componentList.add(item);
+        }
+        return GridView(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
-          itemBuilder: (context, index) {
-            return GestureDetector(
-              onTap: () {
-                showDialog(
-                  context: context,
-                  builder: (context) =>
-                      ComponentName('componentName', 'description', true),
-                );
-              },
-              child: Card(
-                elevation: 5.0,
-                color: Colors.grey[300],
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15.0),
-                ),
-                child: Stack(
-                  alignment: Alignment.bottomCenter,
-                  children: <Widget>[
-                    Image.asset('images/ir.png'),
-                    Text(
-                      'IR Sensor',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: screenWidth(context) * smallFont),
-                    ),
-                  ],
-                ),
-              ),
-            );
-          }),
+          children: componentList,
+        );
+      },
     );
   }
 

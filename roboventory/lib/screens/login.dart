@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:roboventory/screens/admin/admin_home.dart';
 import 'package:roboventory/screens/user/user_home.dart';
@@ -5,11 +6,15 @@ import 'package:roboventory/utilities/constants.dart';
 
 class Login extends StatelessWidget {
   static const String id = 'login_screen';
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+          _auth.signInWithEmailAndPassword(
+              email: 'apoorv@email.com', password: 'aaaaaa');
           Navigator.pushNamed(context, AdminHome.id);
         },
         backgroundColor: Colors.orangeAccent,
@@ -99,7 +104,11 @@ class Login extends StatelessWidget {
               left: screenWidth(context) * 0.28,
               bottom: screenHeight(context) * 0.155,
               child: FlatButton(
-                onPressed: () => Navigator.pushNamed(context, UserHome.id),
+                onPressed: () {
+                  _auth.signInWithEmailAndPassword(
+                      email: 'apoorv@email.com', password: 'aaaaaa');
+                  Navigator.pushNamed(context, UserHome.id);
+                },
                 child: Container(
                   alignment: Alignment.center,
                   height: screenHeight(context) * 0.08,

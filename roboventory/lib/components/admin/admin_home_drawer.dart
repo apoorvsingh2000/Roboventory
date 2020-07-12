@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:roboventory/screens/admin/admin_catalogue.dart';
@@ -8,6 +9,7 @@ double screenWidth(BuildContext context) => MediaQuery.of(context).size.width;
 double screenHeight(BuildContext context) => MediaQuery.of(context).size.height;
 
 Drawer adminHomeDrawer(BuildContext context) {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
   return Drawer(
     child: ListView(
       padding: EdgeInsets.zero,
@@ -49,16 +51,12 @@ Drawer adminHomeDrawer(BuildContext context) {
         NavTile(
           icon: Icon(Icons.history),
           text: 'History',
-          onTap: () {
-            Navigator.pushNamed(context, AdminHistory.id);
-          },
+          onTap: () => Navigator.pushNamed(context, AdminHistory.id),
         ),
         NavTile(
           icon: Icon(CupertinoIcons.book_solid),
           text: 'Catalogue',
-          onTap: () {
-            Navigator.pushNamed(context, AdminCatalogue.id);
-          },
+          onTap: () => Navigator.pushNamed(context, AdminCatalogue.id),
         ),
         NavTile(
           icon: Icon(Icons.monetization_on),
@@ -75,6 +73,7 @@ Drawer adminHomeDrawer(BuildContext context) {
         NavTile(
           icon: Icon(Icons.exit_to_app),
           text: 'Logout',
+          onTap: () => _auth.signOut(),
         ),
       ],
     ),

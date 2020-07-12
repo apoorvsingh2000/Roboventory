@@ -1,9 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:roboventory/widgets/fab.dart';
 import 'package:roboventory/components/user/user_home_drawer.dart';
 import 'package:roboventory/components/user/user_home_borrowed.dart';
-import 'file:///C:/Users/apoor/AndroidStudioProjects/roboventory/lib/components/user/user_home_pending.dart';
+import 'package:roboventory/components/user/user_home_pending.dart';
 
 class UserHome extends StatelessWidget {
   static const String id = 'user_home_screen';
@@ -13,7 +12,6 @@ class UserHome extends StatelessWidget {
       home: DefaultTabController(
         length: 2,
         child: Scaffold(
-          floatingActionButton: Fab(null, Colors.orangeAccent),
           appBar: AppBar(
             elevation: 10.0,
             title: Text('Roboventory'),
